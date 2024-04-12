@@ -18,11 +18,11 @@ export class CreateClientUseCase {
 
         if (custumerAlreadyExists) throw new Error("Customer already exists");
 
-        await prismaClient.client.create({
+        const customerCreated = await prismaClient.client.create({
             data: {
                 ...data,
             },
         });
-        return custumerAlreadyExists;
+        return customerCreated;
     }
 }

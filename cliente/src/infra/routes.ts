@@ -5,7 +5,7 @@ import { CreateClientController } from "../modules/create-client/create-client.c
 const router = Router();
 
 
-router.post("/customers", (request, response) => {
+router.post("/clients", (request, response) => {
     new CreateClientController().handle(request, response);
 })
 
