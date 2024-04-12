@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "kafkajs": "^2.2.4",
+    "prisma": "^5.12.1",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
+  }
+}
