@@ -14,25 +14,6 @@ jobs:
         run: cd ./pedidos && yarn install
       - name: Install dependencies for produto
         run: cd ./produto && yarn install
-  test-setup:
-    name: Setup Jest
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
-      - name: Check Jest installation for cliente
-        run: |
-          echo "Current directory: $(pwd)"
-          cd ../cliente && yarn list jest || exit 1
-
-      - name: Check Jest installation for pedidos
-        run: |
-          echo "Current directory: $(pwd)"
-          cd ../pedidos && yarn list jest || exit 1
-
-      - name: Check Jest installation for produto
-        run: |
-          echo "Current directory: $(pwd)"
-          cd ../produto && yarn list jest || exit 1
   # unusedexports:
   #   name: Find unused exports (dead code)
   #   runs-on: ubuntu-latest
@@ -51,7 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - install
-      - test-setup
     steps:
       - name: Checkout
         uses: actions/checkout@v3
