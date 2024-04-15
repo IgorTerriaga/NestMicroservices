@@ -12,13 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cache node_modules
-        uses: actions/setup-node@v2
-      with:
+       - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          cache: yarn
-      
       - name: Install dependencies for cliente
         run: |
           cd ./cliente 
@@ -48,16 +46,13 @@ jobs:
       - name: Run unit tests for API Cliente
         run: |
           cd cliente/
-          export PATH=$(pwd)/node_modules/.bin:$PATH
           yarn test
       - name: Run unit tests for API Pedidos
         run: |
           cd pedidos/
-          export PATH=$(pwd)/node_modules/.bin:$PATH
           yarn test
       - name: Run unit tests for API Produto
         run: |
           cd produto/
-          export PATH=$(pwd)/node_modules/.bin:$PATH
           yarn test
 
