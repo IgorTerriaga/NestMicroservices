@@ -1,6 +1,7 @@
 import { Kafka } from "kafkajs";
+import testeActions from "./UnusedFunction";
 
-
+testeActions();
 const kafka = new Kafka({
     brokers: ['normal-coral-11745-us1-kafka.upstash.io:9092'],
     ssl: true,
