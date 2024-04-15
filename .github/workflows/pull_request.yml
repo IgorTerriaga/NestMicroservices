@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Navigate to API directory
-        run: cd ${{ matrix.api }}/
+        run: cd ${{ matrix.api }}
       - name: Run ts-prune for API ${{ matrix.api }}
         run: yarn ts-prune --error
 
@@ -54,6 +54,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Navigate to API directory
-        run: cd ${{ matrix.api }}/
+        run: cd ${{ matrix.api }}
       - name: Run unit tests for API ${{ matrix.api }}
         run: yarn test
