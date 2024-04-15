@@ -1,5 +1,5 @@
 name: Pull Request
-'on':
+"on":
   - pull_request
 jobs:
   install:
@@ -19,11 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     steps:
-      - name: Check Jest installation
+      - name: Check Jest installation for cliente
         run: cd cliente/ && yarn list jest || exit 1
-      - name: Check Jest installation
+
+      - name: Check Jest installation for pedidos
         run: cd pedidos/ && yarn list jest || exit 1
-      - name: Check Jest installation
+
+      - name: Check Jest installation for produto
         run: cd produto/ && yarn list jest || exit 1
   # unusedexports:
   #   name: Find unused exports (dead code)
