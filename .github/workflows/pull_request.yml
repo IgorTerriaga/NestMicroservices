@@ -9,21 +9,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dependencies for cliente
-        run: cd cliente/ && yarn install
+        run: cd ./cliente && yarn install
       - name: Install dependencies for pedidos
-        run: cd pedidos/ && yarn install
+        run: cd ./pedidos && yarn install
       - name: Install dependencies for produto
-        run: cd produto/ && yarn install
+        run: cd ./produto && yarn install
   test-setup:
     name: Setup Jest
     runs-on: ubuntu-latest
     needs: install
     steps:
       - name: Check Jest installation for cliente
-        run: cd cliente/ && yarn list jest || exit 1
+        run: cd microservices/cliente && yarn list jest || exit 1
 
       - name: Check Jest installation for pedidos
-        run: cd pedidos/ && yarn list jest || exit 1
+        run: cd microservices/pedidos && yarn list jest || exit 1
 
       - name: Check Jest installation for produto
         run: cd produto/ && yarn list jest || exit 1
