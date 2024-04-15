@@ -1,6 +1,10 @@
 name: Pull Request
-"on":
-  - pull_request
+
+on:
+  pull_request:
+    branches:
+      - main
+
 jobs:
   install:
     name: Installing Packages
@@ -12,19 +16,17 @@ jobs:
         run: |
           cd ./cliente 
           yarn install
-          yarn add jest
       - name: Install dependencies for pedidos
         run: |
           cd ./pedidos
           yarn install
-          yarn add jest
           yarn add @types/jest
       - name: Install dependencies for produto
         run: |
           cd ./produto
           yarn install
-          yarn add jest
           yarn add @types/jest
+
   testing:
     name: Run unit tests
     runs-on: ubuntu-latest
@@ -33,25 +35,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install Jest
-        run: |
-          yarn add --dev jest
-          yarn add @types/jest
       - name: Run unit tests for API Cliente
         run: |
-          echo "Current directory: $(pwd)"
+          echo "Current directory: $(pwd)" 
           cd cliente/
-          echo "Current directory (after cd cliente/): $(pwd)"
           yarn test
       - name: Run unit tests for API Pedidos
         run: |
-          echo "Current directory: $(pwd)"
           cd pedidos/
-          echo "Current directory (after cd pedidos/): $(pwd)"
           yarn test
       - name: Run unit tests for API Produto
         run: |
-          echo "Current directory: $(pwd)"
           cd produto/
-          echo "Current directory (after cd produto/): $(pwd)"
           yarn test
