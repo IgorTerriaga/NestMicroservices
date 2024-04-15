@@ -13,36 +13,42 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{hashFiles('**/yarn.lock')}}
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: ls -la && yarn install
+        run: yarn install
 
   unusedexports:
-    name: Find unused exposts (dead code)
+    name: Find unused exports (dead code)
     runs-on: ubuntu-latest
     needs: install
+    strategy:
+      matrix:
+        api:
+          - cliente
+          - pedidos
+          - produto
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Restore node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{hashFiles('**/yarn.lock')}}
-      - name: Run ts-prune
+      - name: Navigate to API directory
+        run: cd ${{ matrix.api }}
+      - name: Run ts-prune for API ${{ matrix.api }}
         run: yarn ts-prune --error
 
   testing:
-    name: Run unit test
+    name: Run unit tests
     runs-on: ubuntu-latest
     needs: install
+    strategy:
+      matrix:
+        api:
+          - cliente
+          - pedidos
+          - produto
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Restore node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{hashFiles('**/yarn.lock')}}
-      - name: Run unit tests
+      - name: Navigate to API directory
+        run: cd ${{ matrix.api }}
+      - name: Run unit tests for API ${{ matrix.api }}
         run: yarn test
