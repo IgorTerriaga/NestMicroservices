@@ -42,12 +42,13 @@ jobs:
           cd cliente/
           ls
           echo "Current directory: $(pwd)" 
-          yarn test
+          yarn jest
+          cat package.json
       - name: Run unit tests for API Pedidos
         run: |
           cd pedidos/
-          yarn test
+          yarn jest
       - name: Run unit tests for API Produto
         run: |
           cd produto/
-          yarn test
+          yarn jest
