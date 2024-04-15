@@ -14,21 +14,16 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies for cliente
         run: |
-          npm i jest
-          npm i ts-jest
-          npm i @types/jest
           cd ./cliente 
           yarn install
       - name: Install dependencies for pedidos
         run: |
           cd ./pedidos
           yarn install
-          yarn add @types/jest
       - name: Install dependencies for produto
         run: |
           cd ./produto
           yarn install
-          yarn add @types/jest
 
   testing:
     name: Run unit tests
@@ -41,13 +36,16 @@ jobs:
       - name: Run unit tests for API Cliente
         run: |
           cd cliente/
-          ./node_modules/.bin/jest
+          export PATH=$(pwd)/node_modules/.bin:$PATH
+          jest
       - name: Run unit tests for API Pedidos
         run: |
           cd pedidos/
-          yarn test
+          export PATH=$(pwd)/node_modules/.bin:$PATH
+          jest
       - name: Run unit tests for API Produto
         run: |
           cd produto/
-          yarn test
+          export PATH=$(pwd)/node_modules/.bin:$PATH
+          jest
 
