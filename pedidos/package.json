@@ -7,6 +7,7 @@
     "express": "^4.19.2",
     "kafkajs": "^2.2.4",
     "prisma": "^5.12.1",
+    "ts-prune": "^0.10.3",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5"
   },
