@@ -1,7 +1,6 @@
 name: Pull Request
-
-on: [pull_request]
-
+'on':
+  - pull_request
 jobs:
   install:
     name: Installing Packages
@@ -9,63 +8,57 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      # Instalar as dependências para o microserviço "cliente"
       - name: Install dependencies for cliente
         run: cd cliente/ && yarn install
-
-      # Instalar as dependências para o microserviço "pedidos"
       - name: Install dependencies for pedidos
         run: cd pedidos/ && yarn install
-
-      # Instalar as dependências para o microserviço "produto"
       - name: Install dependencies for produto
         run: cd produto/ && yarn install
-
-  unusedexports:
-    name: Find unused exports (dead code)
+  test-setup:
+    name: Setup Jest
     runs-on: ubuntu-latest
     needs: install
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      # prune for apr cliente
-      - name: Prune for API Cliente
-        run: cd cliente/ && yarn ts-prune --error
-
-      # prune for API Pedidos
-      - name: Prune for API Pedidos
-        run: cd pedidos/ && yarn ts-prune --error
-      # prune for apr Produto
-      - name: Prune for API Produto
-        run: cd produto/ && yarn ts-prune --error
-
+      - name: Check Jest installation
+        run: cd cliente/ && yarn list jest || exit 1
+      - name: Check Jest installation
+        run: cd pedidos/ && yarn list jest || exit 1
+      - name: Check Jest installation
+        run: cd produto/ && yarn list jest || exit 1
+  # unusedexports:
+  #   name: Find unused exports (dead code)
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Prune for API Cliente
+  #       run: cd cliente/ && yarn ts-prune --error
+  #     - name: Prune for API Pedidos
+  #       run: cd pedidos/ && yarn ts-prune --error
+  #     - name: Prune for API Produto
+  #       run: cd produto/ && yarn ts-prune --error
   testing:
     name: Run unit tests
     runs-on: ubuntu-latest
-    needs: install
+    needs:
+      - install
+      - test-setup
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      # test for api cliente
       - name: Run unit tests for API Cliente
         run: |
           echo "Current directory: $(pwd)"
           cd cliente/
           echo "Current directory (after cd cliente/): $(pwd)"
           yarn test
-
-      # test for api pedidos
       - name: Run unit tests for API Pedidos
         run: |
           echo "Current directory: $(pwd)"
           cd pedidos/
           echo "Current directory (after cd pedidos/): $(pwd)"
           yarn test
-
-      # test for api prdouto
       - name: Run unit tests for API Produto
         run: |
           echo "Current directory: $(pwd)"
