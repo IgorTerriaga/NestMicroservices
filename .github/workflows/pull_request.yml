@@ -20,13 +20,13 @@ jobs:
     needs: install
     steps:
       - name: Check Jest installation for cliente
-        run: cd microservices/cliente && yarn list jest || exit 1
+        run: cd ./cliente && yarn list jest || exit 1
 
       - name: Check Jest installation for pedidos
-        run: cd microservices/pedidos && yarn list jest || exit 1
+        run: cd ./pedidos && yarn list jest || exit 1
 
       - name: Check Jest installation for produto
-        run: cd produto/ && yarn list jest || exit 1
+        run: cd ./produto && yarn list jest || exit 1
   # unusedexports:
   #   name: Find unused exports (dead code)
   #   runs-on: ubuntu-latest
