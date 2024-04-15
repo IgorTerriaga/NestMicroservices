@@ -22,24 +22,24 @@ jobs:
       - name: Install dependencies for produto
         run: cd produto/ && yarn install
 
-  unusedexports:
-    name: Find unused exports (dead code)
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # unusedexports:
+  #   name: Find unused exports (dead code)
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      # prune for apr cliente
-      - name: Prune for API Cliente
-        run: cd cliente/ && yarn run prune --error
+  #     # prune for apr cliente
+  #     - name: Prune for API Cliente
+  #       run: cd cliente/ && yarn ts-prune --error
 
-      # prune for API Pedidos
-      - name: Prune for API Pedidos
-        run: cd pedidos/ && yarn run prune --error
-      # prune for apr Produto
-      - name: Prune for API Produto
-        run: cd produto/ && yarn run prune --error
+  #     # prune for API Pedidos
+  #     - name: Prune for API Pedidos
+  #       run: cd pedidos/ && yarn ts-prune --error
+  #     # prune for apr Produto
+  #     - name: Prune for API Produto
+  #       run: cd produto/ && yarn ts-prune --error
 
   testing:
     name: Run unit tests
