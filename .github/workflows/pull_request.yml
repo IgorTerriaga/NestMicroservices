@@ -9,13 +9,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        run: yarn install
+
+      # Instalar as dependências para o microserviço "cliente"
+      - name: Install dependencies for cliente
+        run: cd microservices/cliente && yarn install
+
+      # Instalar as dependências para o microserviço "pedidos"
+      - name: Install dependencies for pedidos
+        run: cd microservices/pedidos && yarn install
+
+      # Instalar as dependências para o microserviço "produto"
+      - name: Install dependencies for produto
+        run: cd microservices/produto && yarn install
 
   unusedexports:
     name: Find unused exports (dead code)
