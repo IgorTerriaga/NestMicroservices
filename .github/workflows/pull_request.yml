@@ -37,15 +37,15 @@ jobs:
         run: |
           cd cliente/
           export PATH=$(pwd)/node_modules/.bin:$PATH
-          jest
+          yarn test
       - name: Run unit tests for API Pedidos
         run: |
           cd pedidos/
           export PATH=$(pwd)/node_modules/.bin:$PATH
-          jest
+          yarn test
       - name: Run unit tests for API Produto
         run: |
           cd produto/
           export PATH=$(pwd)/node_modules/.bin:$PATH
-          jest
+          yarn test
 
