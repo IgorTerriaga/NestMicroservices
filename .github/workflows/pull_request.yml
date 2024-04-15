@@ -39,7 +39,7 @@ jobs:
         run: |
           ls
           echo "Current directory: $(pwd)" 
-          cd ../cliente/
+          cd cliente/
           ls
           echo "Current directory: $(pwd)" 
           yarn test
