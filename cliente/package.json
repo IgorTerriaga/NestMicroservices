@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "prune": "ts-prune"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

@@ -32,14 +32,14 @@ jobs:
 
       # prune for apr cliente
       - name: Prune for API Cliente
-        run: cd cliente/ && yarn ts-prune --error
+        run: cd cliente/ && yarn run prune --error
 
       # prune for API Pedidos
       - name: Prune for API Pedidos
-        run: cd pedidos/ && yarn ts-prune --error
+        run: cd pedidos/ && yarn run prune --error
       # prune for apr Produto
       - name: Prune for API Produto
-        run: cd produto/ && yarn ts-prune --error
+        run: cd produto/ && yarn run prune --error
 
   testing:
     name: Run unit tests
