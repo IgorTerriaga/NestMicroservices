@@ -9,24 +9,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dependencies for cliente
-        run: cd ./cliente && yarn install
+        run: |
+          cd ./cliente 
+          yarn install
+          yarn add jest
       - name: Install dependencies for pedidos
-        run: cd ./pedidos && yarn install
+        run: |
+          cd ./pedidos
+          yarn install
+          yarn add jest
+          yarn add @types/jest
       - name: Install dependencies for produto
-        run: cd ./produto && yarn install
-  # unusedexports:
-  #   name: Find unused exports (dead code)
-  #   runs-on: ubuntu-latest
-  #   needs: install
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Prune for API Cliente
-  #       run: cd cliente/ && yarn ts-prune --error
-  #     - name: Prune for API Pedidos
-  #       run: cd pedidos/ && yarn ts-prune --error
-  #     - name: Prune for API Produto
-  #       run: cd produto/ && yarn ts-prune --error
+        run: |
+          cd ./produto
+          yarn install
+          yarn add jest
+          yarn add @types/jest
   testing:
     name: Run unit tests
     runs-on: ubuntu-latest
@@ -36,7 +34,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Jest
-        run: yarn add --dev jest
+        run: |
+          yarn add --dev jest
+          yarn add @types/jest
       - name: Run unit tests for API Cliente
         run: |
           echo "Current directory: $(pwd)"
