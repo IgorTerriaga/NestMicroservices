@@ -57,12 +57,12 @@ jobs:
 
       # test for api cliente
       - name: Run unit tests for API Cliente
-        run: cd cliente/ && yarn teste
+        run: cd cliente/ && yarn test
 
       # test for api pedidos
       - name: Run unit tests for API Pedidos
-        run: cd pedidos/ && yarn pedidos
+        run: cd pedidos/ && yarn test
 
       # test for api prdouto
       - name: Run unit tests for API Produto
-        run: cd produto/ && yarn teste
+        run: cd produto/ && yarn test
